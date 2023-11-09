@@ -14,7 +14,18 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@avans-indiv-p2/backend/dto": ["libs/backend/dto/src/index.ts"],
+      "@avans-indiv-p2/backend/features": [
+        "libs/backend/features/src/index.ts"
+      ],
+      "@avans-indiv-p2/frontend/common": ["libs/frontend/common/src/index.ts"],
+      "@avans-indiv-p2/frontend/features": [
+        "libs/frontend/features/src/index.ts"
+      ],
+      "@avans-indiv-p2/shared/api": ["libs/shared/api/src/index.ts"],
+      "@avans-indiv-p2/ui": ["libs/frontend/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
