@@ -1,0 +1,33 @@
+{
+  "name": "post-a-movie-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/post-a-movie-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/post-a-movie-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "post-a-movie:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "post-a-movie:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "post-a-movie:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/post-a-movie-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["post-a-movie"]
+}
