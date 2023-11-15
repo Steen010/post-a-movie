@@ -8,6 +8,7 @@ import { MealService } from './meal/meal.service';
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,16 @@ const routes: Routes = [
     pathMatch: 'full',
     component: AboutComponent,
   },
+  {
+    path: 'user',
+    pathMatch: 'full',
+    component: UserListComponent,
+  },
+  {
+    path: 'meal',
+    pathMatch: 'full',
+    component: MealListComponent,
+  },
 ];
 
 @NgModule({
@@ -34,12 +45,13 @@ const routes: Routes = [
     MealDetailComponent,
     AboutComponent,
     DashboardComponent,
-    DashboardComponent,
+    UserListComponent,
   ],
-  providers: [MealService, UserService],
+  providers: [UserService, MealService],
   exports: [
     MealListComponent,
     MealDetailComponent,
+    UserListComponent,
     AboutComponent,
     DashboardComponent,
     RouterModule,
