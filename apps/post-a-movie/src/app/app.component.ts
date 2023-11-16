@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { FeaturesModule } from '@avans-indiv-p2/frontend/features';
 import { OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';

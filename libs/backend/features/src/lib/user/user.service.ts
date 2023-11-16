@@ -13,7 +13,47 @@ export class UserService {
       name: 'Koen van Steen',
       password: 'Wachtwoord123!',
       emailaddress: 'koen@gmail.com',
-      gender: Gender.male,
+      gender: Gender.Male,
+      dateOfBirth: new Date(),
+    },
+    {
+      user_id: '1',
+      name: 'Emily Johnson',
+      password: 'SecurePass456',
+      emailaddress: 'emily@email.com',
+      gender: Gender.Female,
+      dateOfBirth: new Date(),
+    },
+    {
+      user_id: '2',
+      name: 'Bob Marley',
+      password: 'Other password',
+      emailaddress: 'Bobby@email.com',
+      gender: Gender.Unknown,
+      dateOfBirth: new Date(),
+    },
+    {
+      user_id: '3',
+      name: 'Michael Jackson',
+      password: 'Secureefee56',
+      emailaddress: 'michaelhsshhs@email.com',
+      gender: Gender.Male,
+      dateOfBirth: new Date(),
+    },
+    {
+      user_id: '4',
+      name: 'Stevie Wonder',
+      password: 'Wowcoolpassword',
+      emailaddress: 'steve@gmail.nl',
+      gender: Gender.Male,
+      dateOfBirth: new Date(),
+    },
+    {
+      user_id: '5',
+      name: 'Pete Davidson',
+      password: 'Badpassword',
+      emailaddress: 'kanye@kim.com',
+      gender: Gender.Unknown,
       dateOfBirth: new Date(),
     },
   ]);
@@ -49,6 +89,23 @@ export class UserService {
     const newUser: IUser = {
       ...user,
       user_id: `user-${Math.floor(Math.random() * 10000)}`,
+    };
+    this.users$.next([...current, newUser]);
+    return newUser;
+  }
+
+  // Werkt dit nou?!?!?!
+  update(
+    user: Pick<
+      IUser,
+      'name' | 'password' | 'emailaddress' | 'gender' | 'dateOfBirth'
+    >
+  ): IUser {
+    Logger.log('create', this.TAG);
+    const current = this.users$.value;
+    const newUser: IUser = {
+      ...user,
+      user_id: '0',
     };
     this.users$.next([...current, newUser]);
     return newUser;

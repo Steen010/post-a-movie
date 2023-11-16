@@ -60,6 +60,36 @@ export class UserService {
       );
   }
 
+  public create(options?: any): Observable<IUser> {
+    const url = `${this.endpoint}`;
+    console.log(`create ${url}`);
+    return this.http
+      .post<ApiResponse<IUser>>(url, {
+        ...options,
+        ...httpOptions,
+      })
+      .pipe(
+        tap(console.log),
+        map((response: any) => response.results as IUser),
+        catchError(this.handleError)
+      );
+  }
+
+  public update(options?: any): Observable<IUser> {
+    const url = `${this.endpoint}`;
+    console.log(`create ${url}`);
+    return this.http
+      .put<ApiResponse<IUser>>(url, {
+        ...options,
+        ...httpOptions,
+      })
+      .pipe(
+        tap(console.log),
+        map((response: any) => response.results as IUser),
+        catchError(this.handleError)
+      );
+  }
+
   /**
    * Handle errors.
    */

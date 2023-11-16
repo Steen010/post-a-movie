@@ -1,8 +1,10 @@
 import { Id } from './id.type';
 
 export enum Gender {
-  male = 'Male',
-  female = 'Female',
+  Male = 'Male',
+  Female = 'Female',
+  Unknown = 'Unknown',
+  None = 'none',
 }
 
 export interface IUser {
@@ -18,5 +20,5 @@ export type ICreateUser = Pick<
   IUser,
   'name' | 'password' | 'emailaddress' | 'gender' | 'dateOfBirth'
 >;
-export type IUpdateUser = Partial<Omit<IUser, 'id'>>;
+export type IUpdateUser = Partial<Omit<IUser, 'user_id'>>;
 export type IUpsertUser = IUser;
