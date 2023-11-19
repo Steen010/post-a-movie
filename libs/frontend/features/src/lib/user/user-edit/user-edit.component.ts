@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Gender, IUser } from '@avans-indiv-p2/shared/api';
 import { UserService } from '../user.service';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Subscription, of, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
@@ -11,13 +11,19 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class UserEditComponent implements OnInit, OnDestroy {
   user: IUser = {
-    user_id: '',
+    id: '',
     name: '',
     password: '',
     emailaddress: '',
     gender: Gender.None,
     dateOfBirth: new Date(),
   };
+
+  genders: any[] = [
+    { fullname: Gender.Male, shortname: Gender.Male },
+    { fullname: Gender.Female, shortname: Gender.Female },
+    { fullname: Gender.Unknown, shortname: Gender.Unknown },
+  ];
 
   subscription: Subscription | undefined = undefined;
 
@@ -30,14 +36,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap
       .pipe(
-        tap((params: ParamMap) =>
-          console.log('user.user_id = ', params.get('user_id'))
-        ),
+        tap((params: ParamMap) => console.log('user.id = ', params.get('id'))),
         switchMap((params: ParamMap) => {
-          if (params.get('user_id') === null) {
-            return this.userService.create();
+          if (params.get('id') === null) {
+            return of({} as IUser);
           }
-          return this.userService.read(params.get('user_id'));
+          return this.userService.read(params.get('id'));
         }),
         tap(console.log)
       )
@@ -53,7 +57,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     console.log('onSubmit', this.user);
 
-    if (this.user.user_id) {
+    if (this.user.id !== undefined) {
       console.log('update user');
       this.userService
         .update(this.user)
@@ -62,6 +66,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
         );
     } else {
       console.log('create user');
+      console.log(this.user);
       this.userService
         .create(this.user)
         .subscribe((data) =>

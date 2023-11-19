@@ -8,7 +8,7 @@ export enum Gender {
 }
 
 export interface IUser {
-  user_id: Id;
+  id: Id;
   emailaddress: string;
   name: string;
   password: string;
@@ -20,5 +20,5 @@ export type ICreateUser = Pick<
   IUser,
   'name' | 'password' | 'emailaddress' | 'gender' | 'dateOfBirth'
 >;
-export type IUpdateUser = Partial<Omit<IUser, 'user_id'>>;
+export type IUpdateUser = Partial<Omit<IUser, 'id'>>;
 export type IUpsertUser = IUser;

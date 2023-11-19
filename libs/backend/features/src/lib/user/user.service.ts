@@ -9,39 +9,39 @@ export class UserService {
 
   private users$ = new BehaviorSubject<IUser[]>([
     {
-      user_id: '0',
-      name: 'Koen van Steen',
-      password: 'Wachtwoord123!',
-      emailaddress: 'koen@gmail.com',
+      id: '0',
+      name: 'Paul McCartney',
+      password: 'Password123!',
+      emailaddress: 'paul@gmail.com',
       gender: Gender.Male,
       dateOfBirth: new Date(),
     },
     {
-      user_id: '1',
-      name: 'Emily Johnson',
+      id: '1',
+      name: 'John Lennon',
       password: 'SecurePass456',
-      emailaddress: 'emily@email.com',
-      gender: Gender.Female,
+      emailaddress: 'John@email.com',
+      gender: Gender.Male,
       dateOfBirth: new Date(),
     },
     {
-      user_id: '2',
+      id: '2',
       name: 'Bob Marley',
-      password: 'Other password',
+      password: 'Mypasswordee444',
       emailaddress: 'Bobby@email.com',
-      gender: Gender.Unknown,
+      gender: Gender.Male,
       dateOfBirth: new Date(),
     },
     {
-      user_id: '3',
+      id: '3',
       name: 'Michael Jackson',
       password: 'Secureefee56',
-      emailaddress: 'michaelhsshhs@email.com',
+      emailaddress: 'michael@email.com',
       gender: Gender.Male,
       dateOfBirth: new Date(),
     },
     {
-      user_id: '4',
+      id: '4',
       name: 'Stevie Wonder',
       password: 'Wowcoolpassword',
       emailaddress: 'steve@gmail.nl',
@@ -49,11 +49,11 @@ export class UserService {
       dateOfBirth: new Date(),
     },
     {
-      user_id: '5',
-      name: 'Pete Davidson',
+      id: '5',
+      name: 'Jimi Hendrix',
       password: 'Badpassword',
-      emailaddress: 'kanye@kim.com',
-      gender: Gender.Unknown,
+      emailaddress: 'jimi@gmail.com',
+      gender: Gender.Male,
       dateOfBirth: new Date(),
     },
   ]);
@@ -65,7 +65,7 @@ export class UserService {
 
   getOne(id: string): IUser {
     Logger.log(`getOne(${id})`, this.TAG);
-    const user = this.users$.value.find((td) => td.user_id === id);
+    const user = this.users$.value.find((td) => td.id === id);
     if (!user) {
       throw new NotFoundException(`User could not be found!`);
     }
@@ -88,26 +88,24 @@ export class UserService {
     // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
     const newUser: IUser = {
       ...user,
-      user_id: `user-${Math.floor(Math.random() * 10000)}`,
+      id: `${Math.floor(Math.random() * 10000)}`,
     };
     this.users$.next([...current, newUser]);
     return newUser;
   }
 
-  // Werkt dit nou?!?!?!
   update(
     user: Pick<
       IUser,
-      'name' | 'password' | 'emailaddress' | 'gender' | 'dateOfBirth'
+      'name' | 'password' | 'emailaddress' | 'gender' | 'dateOfBirth' | 'id'
     >
   ): IUser {
-    Logger.log('create', this.TAG);
+    Logger.log('update', this.TAG);
     const current = this.users$.value;
-    const newUser: IUser = {
+    const updatedUser: IUser = {
       ...user,
-      user_id: '0',
     };
-    this.users$.next([...current, newUser]);
-    return newUser;
+    this.users$.next([...current, updatedUser]);
+    return updatedUser;
   }
 }

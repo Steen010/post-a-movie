@@ -47,9 +47,10 @@ export class UserService {
    *
    */
   public read(id: string | null, options?: any): Observable<IUser> {
-    console.log(`read ${this.endpoint}`);
+    const endpoint = this.endpoint + `/${id}`;
+    console.log(`read ${endpoint}`);
     return this.http
-      .get<ApiResponse<IUser>>(this.endpoint, {
+      .get<ApiResponse<IUser>>(endpoint, {
         ...options,
         ...httpOptions,
       })
@@ -77,7 +78,7 @@ export class UserService {
 
   public update(options?: any): Observable<IUser> {
     const url = `${this.endpoint}`;
-    console.log(`create ${url}`);
+    console.log(`update ${url}`);
     return this.http
       .put<ApiResponse<IUser>>(url, {
         ...options,

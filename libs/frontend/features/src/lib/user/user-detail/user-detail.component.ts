@@ -21,11 +21,9 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap
       .pipe(
-        tap((params: ParamMap) =>
-          console.log('user.id = ', params.get('user_id'))
-        ),
+        tap((params: ParamMap) => console.log('user.id = ', params.get('id'))),
         switchMap((params: ParamMap) =>
-          this.userService.read(params.get('user_id'))
+          this.userService.read(params.get('id'))
         ),
         tap(console.log)
       )
