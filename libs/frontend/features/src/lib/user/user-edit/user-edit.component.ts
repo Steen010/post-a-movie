@@ -3,6 +3,7 @@ import { Gender, IUser } from '@avans-indiv-p2/shared/api';
 import { UserService } from '../user.service';
 import { Subscription, of, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { initModals } from 'flowbite';
 
 @Component({
   selector: 'avans-indiv-p2-user-edit',
@@ -34,6 +35,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    initModals();
     this.route.paramMap
       .pipe(
         tap((params: ParamMap) => console.log('user.id = ', params.get('id'))),
