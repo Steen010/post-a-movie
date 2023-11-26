@@ -26,6 +26,20 @@
           {{ movie?.releaseDate }}
         </dd>
       </div>
+      <div>
+        <dt
+          class="mb-2 font-semibold leading-none text-gray-900 dark:text-white"
+        >
+          Director
+        </dt>
+        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
+          <a
+            routerLink="/features/director/{{ movie?.director?.id }}"
+            class="underline"
+            >{{ movie?.director }}</a
+          >
+        </dd>
+      </div>
     </dl>
     <div class="flex items-center space-x-4">
       <button

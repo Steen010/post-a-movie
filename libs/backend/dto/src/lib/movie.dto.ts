@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsString, IsOptional, IsDate } from 'class-validator';
 import {
   ICreateMovie,
+  IDirector,
   IUpdateMovie,
   IUpsertMovie,
 } from '@avans-indiv-p2/shared/api';
@@ -21,6 +22,9 @@ export class CreateMovieDto implements ICreateMovie {
   @IsDate()
   @IsNotEmpty()
   releaseDate!: Date;
+
+  @IsNotEmpty()
+  director!: IDirector;
 }
 
 export class UpsertMovieDto implements IUpsertMovie {
@@ -39,6 +43,9 @@ export class UpsertMovieDto implements IUpsertMovie {
   @IsDate()
   @IsNotEmpty()
   releaseDate!: Date;
+
+  @IsNotEmpty()
+  director!: IDirector;
 }
 
 export class UpdateMovieDto implements IUpdateMovie {
@@ -57,4 +64,7 @@ export class UpdateMovieDto implements IUpdateMovie {
   @IsDate()
   @IsOptional()
   releaseDate!: Date;
+
+  @IsOptional()
+  director!: IDirector;
 }

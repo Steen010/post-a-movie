@@ -13,36 +13,72 @@ export class MovieService {
       title: 'Transformers',
       duration: '2h 34m',
       releaseDate: new Date(),
+      director: {
+        id: '7',
+        name: 'Michael Bay',
+        nationality: 'American',
+        dateOfBirth: new Date(),
+      },
     },
     {
       id: '1',
       title: 'Star Trek',
       duration: '2h 12m',
       releaseDate: new Date(),
+      director: {
+        id: '8',
+        name: 'J.J. Abrams',
+        nationality: 'American',
+        dateOfBirth: new Date(),
+      },
     },
     {
       id: '2',
       title: 'The Hobbit',
       duration: '3h 02m',
       releaseDate: new Date(),
+      director: {
+        id: '9',
+        name: 'Peter Jackson',
+        nationality: 'American',
+        dateOfBirth: new Date(),
+      },
     },
     {
       id: '3',
       title: 'Fight Club',
       duration: '2h 47m',
       releaseDate: new Date(),
+      director: {
+        id: '10',
+        name: 'David Fincher',
+        nationality: 'American',
+        dateOfBirth: new Date(),
+      },
     },
     {
       id: '4',
       title: 'The Green Book',
       duration: '2h 4m',
       releaseDate: new Date(),
+      director: {
+        id: '11',
+        name: 'Peter Farrelly',
+        nationality: 'American',
+        dateOfBirth: new Date(),
+      },
     },
     {
       id: '5',
       title: 'Shrek',
       duration: '1h 57m',
       releaseDate: new Date(),
+      director: {
+        id: '12',
+        name: 'Mike Mitchell',
+        nationality: 'American',
+        dateOfBirth: new Date(),
+      },
     },
   ]);
 
@@ -65,7 +101,9 @@ export class MovieService {
    * return signature - we still want to respond with the complete
    * object
    */
-  create(movie: Pick<IMovie, 'title' | 'duration' | 'releaseDate'>): IMovie {
+  create(
+    movie: Pick<IMovie, 'title' | 'duration' | 'releaseDate' | 'director'>
+  ): IMovie {
     Logger.log('create', this.TAG);
     const current = this.movies$.value;
     // Use the incoming data, a randomized ID, and a default value of `false` to create the new to-do
@@ -78,7 +116,10 @@ export class MovieService {
   }
 
   update(
-    director: Pick<IMovie, 'title' | 'duration' | 'releaseDate' | 'id'>
+    director: Pick<
+      IMovie,
+      'title' | 'duration' | 'releaseDate' | 'director' | 'id'
+    >
   ): IMovie {
     Logger.log('update', this.TAG);
     const current = this.movies$.value;

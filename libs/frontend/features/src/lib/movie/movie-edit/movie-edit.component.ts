@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IMovie } from '@avans-indiv-p2/shared/api';
+import { IDirector, IMovie } from '@avans-indiv-p2/shared/api';
 import { MovieService } from '../movie.service';
 import { Subscription, of, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { initModals } from 'flowbite';
+import { DirectorService } from '../../director/director.service';
 
 @Component({
   selector: 'avans-indiv-p2-movie-edit',
@@ -11,17 +12,28 @@ import { initModals } from 'flowbite';
   styles: [],
 })
 export class MovieEditComponent implements OnInit, OnDestroy {
+  directors: IDirector[] | null = null;
+
+  director: IDirector = {
+    id: '',
+    name: '',
+    nationality: '',
+    dateOfBirth: new Date(),
+  };
+
   movie: IMovie = {
     id: '',
     title: '',
     duration: '',
     releaseDate: new Date(),
+    director: this.director,
   };
 
   subscription: Subscription | undefined = undefined;
 
   constructor(
     private movieService: MovieService,
+    private directorService: DirectorService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -42,6 +54,11 @@ export class MovieEditComponent implements OnInit, OnDestroy {
       .subscribe((results) => {
         this.movie = results;
       });
+
+    this.subscription = this.directorService.list().subscribe((results) => {
+      console.log(`results: ${results}`);
+      this.directors = results;
+    });
   }
 
   ngOnDestroy(): void {
