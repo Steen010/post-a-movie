@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IUser } from '@avans-indiv-p2/shared/api';
+import { ApiResponse, IMovie } from '@avans-indiv-p2/shared/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-indiv-p2/shared/util-env';
 
@@ -18,8 +18,8 @@ export const httpOptions = {
  *
  */
 @Injectable()
-export class UserService {
-  endpoint = environment.dataApiUrl + '/user';
+export class MovieService {
+  endpoint = environment.dataApiUrl + '/movie';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -28,16 +28,16 @@ export class UserService {
    *
    * @options options - optional URL queryparam options
    */
-  public list(options?: any): Observable<IUser[] | null> {
+  public list(options?: any): Observable<IMovie[] | null> {
     console.log(`list ${this.endpoint}`);
 
     return this.http
-      .get<ApiResponse<IUser[]>>(this.endpoint, {
+      .get<ApiResponse<IMovie[]>>(this.endpoint, {
         ...options,
         ...httpOptions,
       })
       .pipe(
-        map((response: any) => response.results as IUser[]),
+        map((response: any) => response.results as IMovie[]),
         tap(console.log),
         catchError(this.handleError)
       );
@@ -47,47 +47,47 @@ export class UserService {
    * Get a single item from the service.
    *
    */
-  public read(id: string | null, options?: any): Observable<IUser> {
+  public read(id: string | null, options?: any): Observable<IMovie> {
     const endpoint = this.endpoint + `/${id}`;
     console.log(`read ${endpoint}`);
     return this.http
-      .get<ApiResponse<IUser>>(endpoint, {
+      .get<ApiResponse<IMovie>>(endpoint, {
         ...options,
         ...httpOptions,
       })
       .pipe(
         tap(console.log),
-        map((response: any) => response.results as IUser),
+        map((response: any) => response.results as IMovie),
         catchError(this.handleError)
       );
   }
 
-  public create(options?: any): Observable<IUser> {
+  public create(options?: any): Observable<IMovie> {
     const url = `${this.endpoint}`;
     console.log(`create ${url}`);
     return this.http
-      .post<ApiResponse<IUser>>(url, {
+      .post<ApiResponse<IMovie>>(url, {
         ...options,
         ...httpOptions,
       })
       .pipe(
         tap(console.log),
-        map((response: any) => response.results as IUser),
+        map((response: any) => response.results as IMovie),
         catchError(this.handleError)
       );
   }
 
-  public update(options?: any): Observable<IUser> {
+  public update(options?: any): Observable<IMovie> {
     const url = `${this.endpoint}`;
     console.log(`update ${url}`);
     return this.http
-      .put<ApiResponse<IUser>>(url, {
+      .put<ApiResponse<IMovie>>(url, {
         ...options,
         ...httpOptions,
       })
       .pipe(
         tap(console.log),
-        map((response: any) => response.results as IUser),
+        map((response: any) => response.results as IMovie),
         catchError(this.handleError)
       );
   }
